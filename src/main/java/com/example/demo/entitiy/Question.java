@@ -3,20 +3,11 @@ package com.example.demo.entitiy;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @Data
 @Entity
 public class Question {
-    public Question(int id, String question_body, int points, String type, Quiz quiz_id) {
-        this.id = id;
-        this.question_body = question_body;
-        this.points = points;
-        this.type = type;
-        this.quiz_id = quiz_id;
-    }
-
-    public Question() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -24,8 +15,21 @@ public class Question {
     private String question_body;
     private int points;
     private String type;
-    @ManyToOne
-    private Quiz quiz_id;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    private Set<choices> choices;
+
+    public Question(int id, String question_body, int points, String type, Set<com.example.demo.entitiy.choices> choices) {
+        this.id = id;
+        this.question_body = question_body;
+        this.points = points;
+        this.type = type;
+        this.choices = choices;
+    }
+
+    public Question() {
+    }
+
 
     public int getId() {
         return id;
@@ -47,10 +51,6 @@ public class Question {
         this.type = type;
     }
 
-    public void setQuiz_id(Quiz quiz_id) {
-        this.quiz_id = quiz_id;
-    }
-
     public String getQuestion_body() {
         return question_body;
     }
@@ -63,7 +63,4 @@ public class Question {
         return type;
     }
 
-    public Quiz getQuiz_id() {
-        return quiz_id;
-    }
 }

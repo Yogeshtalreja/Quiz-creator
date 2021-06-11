@@ -7,10 +7,11 @@ import javax.persistence.*;
 @Data
 @Entity
 public class choices {
-    public choices(int id, String choice_body, Question question_id) {
+
+    public choices(int id, String choice_body, Boolean iscorrect) {
         this.id = id;
         this.choice_body = choice_body;
-        this.question_id = question_id;
+        this.iscorrect = iscorrect;
     }
 
     public choices() {
@@ -20,8 +21,7 @@ public class choices {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String choice_body;
-    @ManyToOne
-    private Question question_id;
+    private Boolean iscorrect;
 
     public int getId() {
         return id;
@@ -29,10 +29,6 @@ public class choices {
 
     public String getChoice_body() {
         return choice_body;
-    }
-
-    public Question getQuestion_id() {
-        return question_id;
     }
 
     public void setId(int id) {
@@ -43,7 +39,11 @@ public class choices {
         this.choice_body = choice_body;
     }
 
-    public void setQuestion_id(Question question_id) {
-        this.question_id = question_id;
+    public Boolean getIscorrect() {
+        return iscorrect;
+    }
+
+    public void setIscorrect(Boolean iscorrect) {
+        this.iscorrect = iscorrect;
     }
 }

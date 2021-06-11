@@ -6,6 +6,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+
 @Data
 @Entity
 public class Quiz {
@@ -19,6 +21,9 @@ public class Quiz {
     @Temporal(TemporalType.DATE)
 
     private Date deadline;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    private Set<Question> questions;
 
     public int getId() {
         return id;
