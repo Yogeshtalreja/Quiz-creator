@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.dao.QuestionRepository;
 import com.example.demo.dao.QuizRepository;
 import com.example.demo.entitiy.Quiz;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ import java.util.List;
 public class RestController {
     @Autowired
     QuizRepository quizRepository;
-
+    @Autowired
+    QuestionRepository questionRepository;
     @GetMapping(value = "/all")
     public List<Quiz> total_data(){
         return (List<Quiz>) quizRepository.findAll();
@@ -26,4 +28,5 @@ public class RestController {
         quizRepository.save(quiz);
         return (List<Quiz>) quizRepository.findAll();
     }
+
 }
